@@ -1,5 +1,5 @@
 # locallibrary_django
-Fazendo o exemplo do MDN Web Docs: Django Tutorial: (The Local Library website)[https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django/Tutorial_local_library_website]
+Fazendo o exemplo do MDN Web Docs: Django Tutorial: [The Local Library website](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django/Tutorial_local_library_website)
 
 ## parte 1 - Entendendo o LocalLibrary
 
@@ -95,6 +95,49 @@ argumentos comuns de um campo:
 - **primary_key**:Se True, define o campo atual como a chave primária do modelo. Se nenhum campo for especificado como a chave primária, o Django adicionará automaticamente um campo para essa finalidade.
 
 #### Metadados
+
+função: controlar a ordem padrao dos registros retornados.
+
+#### Métodos
+
+use o metodo de classe padrao do python `__st__()` para retornar uma string legivel para o seu objeto.
+
+- get_absolute_url:
+
+```python 
+from django.urls import reverse
+
+def get_absolute_url(self):
+    """Retorna o URL para acessar uma instância específica do modelo."""
+    return reverse('model-detail-view', args=[str(self.id)])
+```
+#### procurando por registros 
+
+exemplo:
+
+```python
+all_books = Book.objects.all()
+love_books = Book.objects.filter(title__contains='love')
+```
+
+no filter podemos usar o seguinte formato: `nome_do_campo__match_type`, onde temos o match type como por exemplo:
+- **contains**: correspondência de maiúsculas e minúsculas.
+
+- **icontains**: insensitivo a maiúsculas e minúsculas
+
+- **iexact**: correspondência exata que não diferencia maiúsculas e minúsculas, 
+
+- **exata**: correspondência exata diferencia maiúsculas de minúsculas 
+
+- **gt**: maior que;
+
+para usar o filter com outros modelos:
+
+
+```python
+action_books = Book.objects.filter(genero__nome __icontains='action')
+```
+onde genero é outro model e nome é um campo de genero.
 
 
 
