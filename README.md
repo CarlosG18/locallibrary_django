@@ -141,3 +141,16 @@ onde genero é outro model e nome é um campo de genero.
 
 ## parte 4: Django Admin Site
 
+### registrando modelos
+
+para registrar os seus modelos no site de admin, basta importar todos os seus modelos e usar o codigo abaixo:
+
+```python
+adimin.site.register(Modelo)
+```
+
+- para criar um superusuario:
+```bash
+$ python manage.py createsuperuser
+```
+
