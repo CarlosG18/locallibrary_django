@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Book, Author, BookUnstance
+from .models import Book, Author, BookUnstance, Genre, Language
 
 def index(request):
-  
   context = {
     
   }
