@@ -196,3 +196,4 @@ fieldsets = (
 
 ## Parte 5: Criando nossa home page
 
+## Parte 6: Lista Genérica e detail view
