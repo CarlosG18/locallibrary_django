@@ -24,7 +24,7 @@ class Book (models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('book-detail', args=[str(self.id)])
+        return reverse('catalog:book_detail', args=[str(self.id)])
 
     def display_genre(self):
         return ', '.join(genre.name for genre in self.genre.all()[:3])

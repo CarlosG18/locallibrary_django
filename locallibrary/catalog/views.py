@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book, Author, BookUnstance, Genre, Language
+from django.views import generic
 
 def index(request):
   num_books = Book.objects.all().count()
@@ -15,14 +16,37 @@ def index(request):
   }
   return render(request, "catalog/index.html", context=context)
   
-def books(request):
-  return HttpResponse("books")
+class BookListView(generic.ListView):
+  model = Book
+  context_object_name = "livros"
+  queryset = Book.objects.all()
+  template_name = "catalog/books.html"
   
-def authors(request):
-  return HttpResponse("authors")
-  
-def book(request, id):
-  return HttpResponse(f'book id = {id}')
+class BookDetailView(generic.DetailView):
+  model = Book
 
-def author(request, id):
-  return HttpResponse(f'authors id =  {id}')
+#def books(request):
+#  books = Book.objects.all()  
+#  return render(request, "catalog/books.html", {
+#    "livros": books,
+#  })
+
+class AuthorListView(generic.ListView):
+  model = Author
+  context_object_name = "authors"
+  template_name = "catalog/authors.html"
+
+class AuthorDetailView(generic.DetailView):
+  model = Author  
+  
+#def authors(request):
+#  autores = Author.objects.all()
+#  return render(request, "catalog/authors.html", {
+#    "authors": autores,
+#  })
+  
+#def book_detail(request, id):
+#  return HttpResponse(f'book id = {id}')
+
+#def author(request, id):
+#  return HttpResponse(f'authors id =  {id}')

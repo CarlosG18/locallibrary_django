@@ -1,0 +1,16 @@
+{% extends '../base.html' %}
+
+{% block title %}Autores{% endblock %}
+
+{% block content %}
+    <h1>Listando Autores</h1>
+
+    {% for autor in authors %}
+    <div>          
+        <p>primeiro nome: {{ autor.first_name }}</p>
+        <p>author: {{ autor.last_name }}</p>
+        <p>descricao: {{ autor.born_date }}</p>
+        <p>isbn: {{ autor.death_date }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}
