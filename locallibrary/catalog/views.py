@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Book, Author, BookUnstance, Genre, Language
 from django.views import generic
 
@@ -8,16 +7,22 @@ def index(request):
   num_intances = BookUnstance.objects.all().count()
   num_intances_available = BookUnstance.objects.filter(status__exact='a').count()
   num_authors = Author.objects.all().count()
+
+  num_visitas = request.session.get('num_visitas', 0)
+  request.session['num_visitas'] = num_visitas+1
+
   context = {
     'num_books': num_books,
-    "num_intances": num_intances,
-    "num_intances_available": num_intances_available,
+    "num_instances": num_intances,
+    "num_instances_available": num_intances_available,
     "num_authors": num_authors,
+    "num_visitas": num_visitas,
   }
   return render(request, "catalog/index.html", context=context)
   
 class BookListView(generic.ListView):
   model = Book
+  paginate_by = 3
   context_object_name = "livros"
   queryset = Book.objects.all()
   template_name = "catalog/books.html"

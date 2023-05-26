@@ -248,5 +248,39 @@ uma forma de acessar os elementos que possuem algum relacionamento, como por exe
 
 ### Paginação
 
+paginação esta embutido nas generics views usando o atributo `paginate_by` da classe. apartir do numero informado neste atributo a visualização começará a paginar os dados. usando os parametros `GET`. **exemplo: catalog/books?page=2**
+
+- usamos o `{{ request.path }}` para obter a **URL** da pagina atual.
+- `is_pagination` verifica se a pagina possui paginação;
+- `page_obj` é o objeto de **Paginator**;
+- `.has_previous` verifica se há pagina anterior;
+- `.number` numero da página atual;
+- `.paginator.num_pages` numero de páginas total;
+- `.has_next` verifica se há proxima página
+- `.next_page_number` retorna o número da proxima página
+- `previous_page_number` retorna o número da página anterior
+
+## parte 7 - Sessôes
+
+### usando sessões
+você pode acessar o atributo `session` na view apartir do parâmetro `request`. ele é um dicionario. exemplo:
+
+```python
+request.session['nome'] = 'carlos'
+```
+
+### obtendo a contagem de visitas do site
+
+```python
+num_visitas = request.session.get('num_visitas', 0)
+request.session['num_visitas'] = num_visitas+1
+```
+explicando o codigo anterior, a primeira linha cria uma chave chamada `num_visitas` e seta 0 para ela caso ela ainda não foi criada.
+já na segunda linha, a cada atualizada na home do site ele irá pegar a variavel de sessao `num_visitas` e incrementar.
+
+## parte 8 - Autentificação de usuário e permissões
+
+
+
 
 

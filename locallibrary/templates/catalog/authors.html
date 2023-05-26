@@ -7,10 +7,9 @@
 
     {% for autor in authors %}
     <div>          
-        <p>primeiro nome: {{ autor.first_name }}</p>
-        <p>author: {{ autor.last_name }}</p>
-        <p>descricao: {{ autor.born_date }}</p>
-        <p>isbn: {{ autor.death_date }}</p>
+        <ul>
+            <li><a href="{% url 'catalog:author-detail' autor.pk %}">{{ autor.first_name }},{{ autor.first_name }} ({{ autor.born_date }})</a></li>
+        </ul>
     </div>
     {% endfor %}
 {% endblock %}
