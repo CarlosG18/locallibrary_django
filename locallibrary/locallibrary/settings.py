@@ -40,6 +40,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'locallibrary.urls'
+LOGIN_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {

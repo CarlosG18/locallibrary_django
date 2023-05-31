@@ -280,6 +280,51 @@ já na segunda linha, a cada atualizada na home do site ele irá pegar a variave
 
 ## parte 8 - Autentificação de usuário e permissões
 
+### criando usuários e grupos
+
+**obs: os grupos e usuarios foram criados no site de admin**
+
+- adicione a seguinte url no seu projeto:
+
+```python
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]
+```
+
+apos adicionar esta url, você terá acesso aos seguintes link porem sem templates:
+
+- accounts/ login/ [name='login']
+- accounts/ logout/ [name='logout']
+- accounts/ password_change/ [name='password_change']
+- accounts/ password_change/done/[name='password_change_done']
+- accounts/ password_reset/ [name='password_reset']
+- accounts/ password_reset/done/ [name='password_reset_done']
+- accounts/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+- accounts/ reset/done/ [name='password_reset_complete']
+
+para informar os templates você devera usar a seguinte estrutura:
+
+- crie uma pasta no seu diretorio de tamplates chamada `registration`;
+
+os seguintes templates são os respetivos a:
+
+- **login.html**: tela de login;
+- **logged_out.html**: tela de logout;
+- **password_reset_form.html**: tela de redefinição de senha;
+- **password_reset_done.html**: tela de redefinição de senha comcluida;
+- **password_reset_email.html**: tela de email de redefinição de senha;
+- **password_reset_confirm.html**: tela de confirmação de redefinição de senha;
+- **password_reset_complete.html**: tela de redefinição de senha concluida;
+
+quando o usuario faz o login ele é direcionado para a url `localhost:8000/accounts/profile/` para mudar isso vá até o arquivo `settings` de seu projeto e faça:
+
+```python
+LOGIN_REDIRECT_URL = '/'
+```
+
+
+
 
 
 
