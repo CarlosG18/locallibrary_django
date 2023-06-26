@@ -322,6 +322,28 @@ quando o usuario faz o login ele é direcionado para a url `localhost:8000/accou
 ```python
 LOGIN_REDIRECT_URL = '/'
 ```
+use o `{{ user.is_authenticated }}` para verificar se o usuario atual esta autenticado.
+
+em uma url podemos usar variaveis adicionais como por exemplo:
+```python
+ <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+```
+neste caso usamos o `??next={{ request.path }}` que envia como parametro `next` para a view a url como conteudo, neste caso em particular, ao ser realizado o login ou logout a view que em que foi clicado (login/logout) voltará. isso pode ser usado pra enviar variaveis auxiliares.
+
+- usando o decorator `@login_required` é possivel restringir o acesso em determinada function view. para importar use:
+
+```python 
+from django.contrib.auth.decorators import login_required
+```
+- para views baseadas em classes:
+
+```python
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class Minhaview(LoginRequiredMixin, View):
+```
+em query's podemos usar quantos `.filter` quisermos.
+
 
 
 

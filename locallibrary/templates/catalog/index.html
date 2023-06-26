@@ -13,4 +13,6 @@
   </ul>
 
   <p>You have visited this page {{ num_visitas }}{% if num_visitas == 1 %} time{% else %} times{% endif %}.</p>
-{% endblock %}
+
+  <a href="{% url 'login' %}">fazer login</a>
+  {% endblock %}

@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from .models import Book, Author, BookUnstance, Genre, Language
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
   num_books = Book.objects.all().count()
   num_intances = BookUnstance.objects.all().count()
   num_intances_available = BookUnstance.objects.filter(status__exact='a').count()
   num_authors = Author.objects.all().count()
-
+  
   num_visitas = request.session.get('num_visitas', 0)
   request.session['num_visitas'] = num_visitas+1
 
@@ -55,3 +56,13 @@ class AuthorDetailView(generic.DetailView):
 
 #def author(request, id):
 #  return HttpResponse(f'authors id =  {id}')
+
+class ListBookInstance(LoginRequiredMixin, generic.ListView):
+  model = BookUnstance
+  template_name = "catalog/list_books_instances.html"
+  paginate_by = 10
+
+  def get_queryset(self):
+    return(
+      BookUnstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+    )
