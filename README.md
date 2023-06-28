@@ -344,8 +344,16 @@ class Minhaview(LoginRequiredMixin, View):
 ```
 em query's podemos usar quantos `.filter` quisermos.
 
+#### Permissões 
 
+são as permissoes que os usuarios possuem para modificar os models no site de administração. a definição de permissões é realizada no model a partir da `class Meta`, usando o campo `permissions`. essas permissões são escritas em tuplas onde possui o nome da permisao e o valor de exibição da permissão.
 
+as permissoes do usuario atual são guardadas em `{{ perms }}`. podemos usa-la para verificar se o usuario possui alguma permissão. nas views para testar uma permissão podemos usar o decorator `@permission_required("nome_da_permissão")` para views baseadas em função ou extender a classe `PermissionRequeridMixin` para views baseadas em classes, usando o `permission_required = 'nome_da_permissao'`
+
+**obs:**
+> @permission_required redireciona para a tela de login (HTTP Status 302). PermissionRequiredMixinretorna 403 (status HTTP proibido).
+
+## parte 9 - trabalhando com forms
 
 
 

@@ -1,0 +1,19 @@
+{% extends "../base.html" %}
+
+{% block content %}
+    <h1>Borrowed books</h1>
+
+    {% if bookunstance_list %}
+    <ul>
+
+      {% for bookinst in bookunstance_list %}
+      <li>
+        <a href="{% url 'catalog:book_detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> ({{ bookinst.due_back }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no books borrowed.</p>
+    {% endif %}
+{% endblock %}

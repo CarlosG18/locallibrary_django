@@ -1,7 +1,8 @@
+from re import template
 from django.shortcuts import render
 from .models import Book, Author, BookUnstance, Genre, Language
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 def index(request):
   num_books = Book.objects.all().count()
@@ -66,3 +67,14 @@ class ListBookInstance(LoginRequiredMixin, generic.ListView):
     return(
       BookUnstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
     )
+
+class ListBookNoReturn(PermissionRequiredMixin,LoginRequiredMixin,generic.ListView):
+  permission_required = "can_mark_returned"
+  model = BookUnstance
+  template_name = "catalog/booksnoreturn.html"
+  paginate_by = 10
+
+  def get_queryset(self):
+      return (
+        BookUnstance.objects.filter(status__exact='r')
+      )
