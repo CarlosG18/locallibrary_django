@@ -3,8 +3,10 @@ from django.shortcuts import render
 from .models import Book, Author, BookUnstance, Genre, Language
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+# from django import forms
 
 def index(request):
+  # help(forms.fields)
   num_books = Book.objects.all().count()
   num_intances = BookUnstance.objects.all().count()
   num_intances_available = BookUnstance.objects.filter(status__exact='a').count()
