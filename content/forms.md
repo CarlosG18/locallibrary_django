@@ -46,12 +46,53 @@ alguns argumentos comuns:
 
 - **widget**: O widget de exibição a ser usado.
 
-- **help_text(como visto no exemplo acima)**: Texto adicional que pode ser exibido em formulários para explicar como usar o campo.
+- **help_text**: Texto adicional que pode ser exibido em formulários para explicar como usar o campo.
 
 - **error_messages**: uma lista de mensagens de erro para o campo. Você pode substituí-los por suas próprias mensagens, se necessário.
 
 - **validators**: Uma lista de funções que serão chamadas no campo quando ele for validado.
 
-- **localize**: Habilita a localização da entrada de dados do formulário (veja o link para mais informações).
+- **localize**: Habilita a localização da entrada de dados do formulário.
 
 - **disabled**: O campo é exibido, mas seu valor não pode ser editado se for True. O padrão é False.
+
+## Validação
+
+para acessar um dado em um form podemos usar o metodo `cleaned_data['nome_do_campo']`.
+
+para levatarmos possiveis erros na validação dos dados inseridos no form podemos fazer uma limpagem nos dados alterando a função `def clean_nome_do_campo`:
+
+```python
+from django.core.exceptions import ValidationError
+
+def clean_nome_do_campo(self):
+    data = self.cleaned_data['nome_do_campo']
+
+    #alguma regra para limpagem dos dados:
+    #lance a exceção:
+    raise ValidationError('message_error')
+```
+
+o django tambem oferece funções de tradução. para usa-las basta importar:
+
+```python
+from django.utils.translation import gettext_lazy as _
+```
+
+o que estiver em `_()` será traduzido de acordo com o idioma da pagina.
+
+## etapas de uma view de um forms
+
+1. primeiro, nos temos que redenrizar um form padrão para o usuario se for detectado um "primeiro" acesso e se esses dados forem para realizar atualizações no banco de dados (usando o metodo POST). para isso podemos fazer a seguinte verificação na view:
+
+```python
+    if request.method == "POST":
+        #codigo
+    else: # seria o equivalente ao GET
+        form = Form()
+    
+    return render(request, "template", {
+        'form': form, 
+    })
+```
+

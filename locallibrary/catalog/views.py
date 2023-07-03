@@ -4,6 +4,7 @@ from .models import Book, Author, BookUnstance, Genre, Language
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # from django import forms
+from .forms import FormDueBack
 
 def index(request):
   # help(forms.fields)
@@ -80,3 +81,13 @@ class ListBookNoReturn(PermissionRequiredMixin,LoginRequiredMixin,generic.ListVi
       return (
         BookUnstance.objects.filter(status__exact='r')
       )
+
+def renew_book_librarian(request):
+  if request.method == "POST":
+    form = FormDueBack(request.POST)
+    if form.is_valid():
+      
+  else:
+    form = FormDueBack()
+
+  

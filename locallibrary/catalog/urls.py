@@ -10,4 +10,5 @@ urlpatterns = [
   path("author/<int:pk>/", views.AuthorDetailView.as_view(), name="author-detail"),
   path("mybooks/", views.ListBookInstance.as_view(), name='my-borrowed'),
   path("allbooksreserved/", views.ListBookNoReturn.as_view(), name="booksnoreturn"),
+  path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian'),
 ]
