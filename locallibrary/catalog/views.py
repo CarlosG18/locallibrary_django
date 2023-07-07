@@ -1,10 +1,15 @@
 from re import template
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Book, Author, BookUnstance, Genre, Language
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # from django import forms
 from .forms import FormDueBack
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required, permission_required
+
 
 def index(request):
   # help(forms.fields)
@@ -82,12 +87,23 @@ class ListBookNoReturn(PermissionRequiredMixin,LoginRequiredMixin,generic.ListVi
         BookUnstance.objects.filter(status__exact='r')
       )
 
-def renew_book_librarian(request):
+@login_required
+@permission_required('catalog.can_mark_returned', raise_exception=True)
+def renew_book_librarian(request, pk):
+  book_instance = get_object_or_404(BookUnstance, pk=pk)
+
   if request.method == "POST":
     form = FormDueBack(request.POST)
     if form.is_valid():
-      
+      book_instance.due_back = form.cleaned_data['new_date']
+      book_instance.save()
+      return HttpResponseRedirect(reverse('catalog:home'))
   else:
-    form = FormDueBack()
+    suposta_new_date = datetime.date.today() + datetime.timedelta(weeks=3)
+    form = FormDueBack(initial={'new_date': suposta_new_date})
+  return render(request, 'catalog/form_renew_book.html', {
+    'form': form,
+    'book_instace': book_instance,
+  })
 
   

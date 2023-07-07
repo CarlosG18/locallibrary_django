@@ -96,3 +96,7 @@ o que estiver em `_()` será traduzido de acordo com o idioma da pagina.
     })
 ```
 
+ao usar o `form.is_valid()` ele irá verificar se todos os campos do formulario são validos, esse metodo tambem verifica funções internas do forms que são destinadas a limpagem de dados.
+
+no template devemos usar o `{% csrf_token %}` para gerar uma criptografia para que os dados sejam enviados com segurança. 
+
