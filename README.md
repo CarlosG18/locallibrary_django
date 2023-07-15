@@ -58,7 +58,8 @@ $ python3 manage.py migrate
 
 - [parte 9 - trabalhando com forms](https://github.com/CarlosG18/locallibrary_django/tree/main/content/forms.md)
 
+- [parte 10 - testes unitários](https://github.com/CarlosG18/locallibrary_django/tree/main/content/testes.md)
 
-
+- - [parte 11 - deploy](https://github.com/CarlosG18/locallibrary_django/tree/main/content/deploy.md)
 
 
