@@ -42,3 +42,19 @@ web: python manage.py migrate && python manage.py collectstatic && gunicorn loca
 ### configuração do banco de dados
 
 `dj-database-url` é usado para extrair a configuração de um banco de dados django de uma variavel de ambiente.
+
+### servindo arquivo estaticos
+
+variaveis importantes:
+
+- **STATIC_URL**: este é o local base do URL a partir do qual os arquivos estáticos serão exibidos, por exemplo, em um CDN.
+- **STATIC_ROOT**: Este é o caminho absoluto para um diretório onde a ferramenta collectstatic do Django reunirá todos os arquivos estáticos referenciados em nossos modelos. Depois de coletados, eles podem ser enviados como um grupo para onde os arquivos serão hospedados.
+- **STATICFILES_DIRS**: lista os diretórios adicionais que a ferramenta collectstatic do Django deve procurar por arquivos estáticos.
+
+use o comando abaixo para coletar os arquivos estaticos na pasta `STATIC_ROOT`
+
+```bash
+python3 manage.py collectstatic
+```
+
+para os arquivos estaticos vamos usar o whitenoise.
