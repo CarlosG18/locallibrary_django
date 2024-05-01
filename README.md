@@ -1,65 +1,20 @@
 # locallibrary_django
-Fazendo o exemplo do MDN Web Docs: Django Tutorial: [The Local Library website](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django/Tutorial_local_library_website)
 
-## parte 1 - Entendendo o LocalLibrary
+> Estudando o tutorial de exemplo do MDN Web Docs: Django Tutorial: [The Local Library website](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django/Tutorial_local_library_website)
 
-Neste exemplo o `LocalLibray` será um site com catálogo de livros, ao qual o usuário irá poder encontrar livros disponíveis, além de gerenciar sua conta.
+**Tecnologias Ultilizadas**: 
+- ![django-logo](https://img.shields.io/badge/django-228B22?style=for-the-badge&logo=django&logoColor=white&labelColor=228B22)
 
-## parte 2 - criando o esqueleto do site
+## 🧩 Contextualização da aplicação
 
-- o arquivo `__init__.py` geralmente em branco é usado para tratar um diretório como um pacote.
+Neste exemplo, o LocalLibrary será um site com um catálogo de livros, no qual os usuários poderão encontrar livros disponíveis e gerenciar suas contas. O projeto aborda as funcionalidades básicas de um sistema de biblioteca online, incluindo a exibição de livros disponíveis, a pesquisa por títulos, autores e categorias, além da possibilidade de um usuário fazer login, renovar empréstimos e verificar seu histórico de empréstimos.
 
-- no arquivo de configuração de seu projeto `settings.py` existe o `DEBUG`. é recomendado que na produção essa variável seja atribuida como *false*, pois ela em *true* facilita na depuração, porém da brechas a invasões. portanto, durante  desenvolvimento dos códigos ela pode esta ativa.
+## 🎯 Objetivo
 
-**trocando a url raiz**: para trocar a url raiz use a RedirectView de uma generic view no arquivo `urls.py` do seu projeto. exemplo
+Ao seguir este exemplo, você terá uma compreensão prática de como desenvolver uma aplicação web com Django para gerenciar informações de uma biblioteca virtual. O projeto demonstra como estruturar um projeto Django, definir modelos de dados para representar livros, autores, empréstimos, etc., criar views para manipular esses dados e usar templates para exibir informações de forma clara e intuitiva para o usuário.
 
-```python 
-from django.views.generic import RedirectView
+## 🌐 Deploy
 
-urlpatterns = [
-  path('', RedirectView.as_view(url='catalog/')),
-]
-```
+Observe o exemplo do sistema de empréstimos de libros em funcionamento.
 
-- você pode habilitar a veiculação de arquivos estáticos durante o desenvolvimento:
-
-```python 
-from django.conf import settings
-from django.conf.urls.static import static
-
-urlpatterns = [
-    ...
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-```
-A função `static()` é usada para adicionar as URLs necessárias para servir os arquivos estáticos da aplicação. Ela recebe dois argumentos: `settings.STATIC_URL` e `settings.STATIC_ROOT`, que são usados para construir as URLs corretas. Em outras palavras, quando uma solicitação é feita a uma URL que começa com `STATIC_URL`, o servidor web retorna o arquivo correspondente em `STATIC_ROOT`.
-
-A configuração `settings.STATIC_URL` é a URL base na qual todos os arquivos estáticos da aplicação serão servidos. Por exemplo, se o valor de `STATIC_URL` for **'/static/'**, e um arquivo de folha de estilo for armazenado em **BASE_DIR / static / css / style.css**, o caminho completo para esse arquivo seria `http://example.com/static/css/style.css`
-
-`settings.STATIC_ROOT` é o caminho absoluto para o diretório que contém todos os arquivos estáticos coletados com o comando `collectstatic`. Esse diretório é o local no qual o servidor web procura os arquivos estáticos para servir.
-
-- toda vez que o models for modificado realize os seguintes comandos abaixo:
-
-```bash
-$ python3 manage.py makemigrations
-$ python3 manage.py migrate
-```
-
-## links para resumo das partes desenvolvidas:
-
-- [parte 3 - usando o model](https://github.com/CarlosG18/locallibrary_django/tree/main/content/models.md)
-
-- [parte 4: Django Admin Site](https://github.com/CarlosG18/locallibrary_django/tree/main/content/admin_site.md)
-
-- [Parte 6: Lista Genérica e detail view](https://github.com/CarlosG18/locallibrary_django/tree/main/content/classviews.md)
-
-- [parte 7 - Sessôes](https://github.com/CarlosG18/locallibrary_django/tree/main/content/session.md)
-
-- [parte 8 - Autentificação de usuário e permissões](https://github.com/CarlosG18/locallibrary_django/tree/main/content/autentificacao.md)
-
-- [parte 9 - trabalhando com forms](https://github.com/CarlosG18/locallibrary_django/tree/main/content/forms.md)
-
-- [parte 10 - testes unitários](https://github.com/CarlosG18/locallibrary_django/tree/main/content/testes.md)
-
-- - [parte 11 - deploy](https://github.com/CarlosG18/locallibrary_django/tree/main/content/deploy.md)
-
-
+- O **LocalLibrary_django** pode ser acessado [🔗 por aqui]()
