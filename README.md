@@ -12,9 +12,3 @@ Neste exemplo, o LocalLibrary será um site com um catálogo de livros, no qual 
 ## 🎯 Objetivo
 
 Ao seguir este exemplo, você terá uma compreensão prática de como desenvolver uma aplicação web com Django para gerenciar informações de uma biblioteca virtual. O projeto demonstra como estruturar um projeto Django, definir modelos de dados para representar livros, autores, empréstimos, etc., criar views para manipular esses dados e usar templates para exibir informações de forma clara e intuitiva para o usuário.
-
-## 🌐 Deploy
-
-Observe o exemplo do sistema de empréstimos de libros em funcionamento.
-
-- O **LocalLibrary_django** pode ser acessado [🔗 por aqui]()
